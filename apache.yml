@@ -1,8 +1,10 @@
-- name: apache install
-  hosts: all
- # become: yes
+- hosts: localhost
+  gather_facts: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   tasks:
     - name: Install Apache
       apt:
         name: apache2
         state: present
+      become: yes
