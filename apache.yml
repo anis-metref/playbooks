@@ -1,0 +1,8 @@
+---
+- hosts: awx
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
