@@ -3,8 +3,14 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: Install Apache
+    - name: Mettre à jour le système
+      apt:
+        update_cache: yes
+      become: yes
+
+    - name: Installer Apache
       apt:
         name: apache2
         state: present
       become: yes
+
