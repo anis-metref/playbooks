@@ -1,6 +1,6 @@
 - name: apache install
   hosts: all
-  become: yes
+ # become: yes
   tasks:
     - name: Install Apache
       apt:
