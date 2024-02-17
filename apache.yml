@@ -1,5 +1,5 @@
----
-- hosts: awx
+- name: apache install
+  hosts: all
   become: yes
   tasks:
     - name: Install Apache
