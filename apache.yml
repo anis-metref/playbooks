@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Installer Apache
-      become: no
+      become: true
       yum:
         name: httpd
         state: present
