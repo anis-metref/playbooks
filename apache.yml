@@ -5,8 +5,8 @@
   tasks:
     - name: Installer Apache
       become: no
-      apt:
-        name: apache2
+      yum:
+        name: httpd
         state: present
       register: apache_installation
 
