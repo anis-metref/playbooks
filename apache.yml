@@ -5,7 +5,7 @@
   tasks:
     - name: Installer Apache
       become: true
-      dnf:
+      apt:
         name: nginx
         state: present
       register: apache_installation
