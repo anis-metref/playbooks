@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Installer Apache
-      become: yes
+      become: no
       apt:
         name: apache2
         state: present
