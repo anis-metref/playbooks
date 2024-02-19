@@ -1,10 +1,10 @@
 ---
 - name: Installer Apache et envoyer une notification en cas de succès ou d'échec
   hosts: localhost
-  gather_facts: no
+  gather_facts: yes
   tasks:
     - name: Installer Apache
-      become: true
+      become: yes
       apt:
         name: nginx
         state: present
