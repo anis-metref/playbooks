@@ -12,7 +12,7 @@
     - name: Envoyer une notification à Discord en cas de succès de la mise à jour
       when: apt_update_result.changed
       uri:
-        url: "https://discord.com/api/webhooks/WEBHOOK_ID/TOKEN"  # Remplacez WEBHOOK_ID et TOKEN par les valeurs de votre webhook Discord
+        url: "https://discord.com/api/webhooks/1208946311643013210/wZ5PHFOgt4sRmer5w3Hyr8dd15GizUS-Y-Xa_JPAtztNv10Uo6Sc5AcgFHU2FAHysX7n"  # Remplacez WEBHOOK_ID et TOKEN par les valeurs de votre webhook Discord
         method: POST
         body_format: json
         headers:
@@ -24,7 +24,7 @@
     - name: Envoyer une notification à Discord en cas d'échec de la mise à jour
       when: apt_update_result.failed
       uri:
-        url: "https://discord.com/api/webhooks/WEBHOOK_ID/TOKEN"  # Remplacez WEBHOOK_ID et TOKEN par les valeurs de votre webhook Discord
+        url: "https://discord.com/api/webhooks/1208946311643013210/wZ5PHFOgt4sRmer5w3Hyr8dd15GizUS-Y-Xa_JPAtztNv10Uo6Sc5AcgFHU2FAHysX7n"  # Remplacez WEBHOOK_ID et TOKEN par les valeurs de votre webhook Discord
         method: POST
         body_format: json
         headers:
