@@ -16,7 +16,8 @@
 
     - name: Envoyer une notification à Discord en cas de succès
       when: apache_installation.changed == true
-      uri: "https://discord.com/api/webhooks/1208946311643013210/wZ5PHFOgt4sRmer5w3Hyr8dd15GizUS-Y-Xa_JPAtztNv10Uo6Sc5AcgFHU2FAHysX7n"  # Remplacez WEBHOOK_ID et TOKEN par les valeurs de votre webhook Discord
+      uri:
+        uri: "https://discord.com/api/webhooks/1208946311643013210/wZ5PHFOgt4sRmer5w3Hyr8dd15GizUS-Y-Xa_JPAtztNv10Uo6Sc5AcgFHU2FAHysX7n"  # Remplacez WEBHOOK_ID et TOKEN par les valeurs de votre webhook Discord
         method: POST
         body_format: json
         headers:
