@@ -1,7 +1,7 @@
 ---
 - name: Installer Apache et envoyer une notification en cas de succès ou d'échec
   hosts: localhost
-  gather_facts: yes
+  gather_facts: no
   tasks:
     - name: Installer Apache
       become: yes
