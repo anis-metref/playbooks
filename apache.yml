@@ -8,6 +8,8 @@
       dnf:
         name: httpd
         state: present
+      vars:
+        use_backend: dnf4
       register: apache_installation
 
     - name: Vérifier l'état de l'installation Apache
