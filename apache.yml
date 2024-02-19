@@ -1,16 +1,51 @@
-- hosts: localhost
+---
+- name: Installer Apache et envoyer une notification en cas de succès ou d'échec
+  hosts: cible
   gather_facts: yes
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: Mettre à jour le système
-      apt:
-        update_cache: yes
-      become: yes
-
     - name: Installer Apache
+      become: yes
       apt:
         name: apache2
         state: present
-      become: yes
+      register: apache_installation
+
+    - name: Vérifier l'état de l'installation Apache
+      debug:
+        var: apache_installation
+
+    - name: Envoyer une notification à Discord en cas de succès
+      when: apache_installation.changed == true
+      uri:
+        url: "https://discord.com/api/webhooks/WEBHOOK_ID/TOKEN"  # Remplacez WEBHOOK_ID et TOKEN par les valeurs de votre webhook Discord
+        method: POST
+        body_format: json
+        headers:
+          Content-Type: "application/json"
+        body:
+          content: "Installation réussie d'Apache sur {{ ansible_hostname }}"
+      register: discord_response_success
+      
+    - name: Afficher la réponse du serveur Discord en cas de succès
+      when: apache_installation.changed == true
+      debug:
+        var: discord_response_success
+
+    - name: Envoyer une notification à Discord en cas d'échec
+      when: apache_installation.failed == true
+      uri:
+        url: "https://discord.com/api/webhooks/WEBHOOK_ID/TOKEN"  # Remplacez WEBHOOK_ID et TOKEN par les valeurs de votre webhook Discord
+        method: POST
+        body_format: json
+        headers:
+          Content-Type: "application/json"
+        body:
+          content: "Échec de l'installation d'Apache sur {{ ansible_hostname }}"
+      register: discord_response_failure
+      
+    - name: Afficher la réponse du serveur Discord en cas d'échec
+      when: apache_installation.failed == true
+      debug:
+        var: discord_response_failure
+
 
