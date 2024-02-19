@@ -6,10 +6,8 @@
     - name: Installer Apache
       become: true
       dnf:
-        name: httpd
+        name: nginx
         state: present
-      vars:
-        use_backend: dnf4
       register: apache_installation
 
     - name: Vérifier l'état de l'installation Apache
