@@ -44,7 +44,7 @@ ansible-playbook playbook.yml --tags "update,configuration"
         
 
 ```cpp
-ansible-playbook playbook.yml --check
+ansible-playbook update.yml --check
 
 ```
 
