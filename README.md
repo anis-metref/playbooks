@@ -63,7 +63,7 @@ Ces commandes et options vous permettront de tester, déboguer et exécuter vos 
 
 Le playbook Ansible update.yml met à jour les systèmes d'exploitation Debian et envoie une notification à Discord en cas de succès ou d'échec de la mise à jour :
 
-```terraform
+```bash
 - name: Mise à jour des systèmes d'exploitation Debian et notification à Discord
   hosts: all
   become: true
