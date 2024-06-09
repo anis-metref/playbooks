@@ -1,4 +1,4 @@
-#### Mise a jour du systeme Debian en utilisant  Ansible : 
+### Mise à jour du système Debian en utilisant Ansible :
 
 Le playbook Ansible update.yml met à jour les systèmes d'exploitation Debian et envoie une notification à Discord en cas de succès ou d'échec de la mise à jour :
 
