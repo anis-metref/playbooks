@@ -104,3 +104,97 @@ Ce Playbook Ansible effectue les actions suivantes :
 4.  **Affichage des réponses du serveur Discord** : Utilise le module `debug` pour afficher les réponses du serveur Discord en cas de succès ou d'échec. Cela permet de vérifier les réponses reçues.
 
 N'oubliez pas de remplacer les valeurs `WEBHOOK_ID` et `TOKEN` dans les URL des webhooks Discord par les valeurs correspondantes de votre webhook Discord.
+
+
+####
+###
+## Cas plus complexes
+# Playbook pour mettre à jour les paquets, installer Apache, et inclure des boucles et des rôles
+
+```yaml
+- name: Mise à jour et installation de paquets avec Apache
+  hosts: all
+  become: true  # Exécuter les tâches avec les privilèges de superutilisateur (root)
+
+  vars:
+    ma_variable: "valeur"
+
+  tasks:
+    - name: Mise à jour des paquets
+      apt:
+        update_cache: yes  # Mettre à jour le cache des paquets
+        upgrade: yes  # Mettre à jour tous les paquets
+
+    - name: Installer des paquets essentiels
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - htop
+        - nano
+
+    - name: Vérifier si Apache est installé
+      stat:
+        path: /usr/sbin/apache2  # Chemin vers le binaire Apache
+      register: apache_check  # Enregistrer le résultat dans une variable
+
+    - name: Installer Apache si ce n'est pas déjà fait
+      apt:
+        name: apache2  # Nom du paquet Apache
+        state: present  # Assurer que le paquet est présent
+      when: apache_check.stat.exists == False  # Condition pour installer Apache si ce n'est pas déjà fait
+
+    - name: Exemple d'ajout de variables
+      debug:
+        msg: "La valeur de ma_variable est {{ ma_variable }}"  # Utilisation de la variable ma_variable
+
+    - name: Exemple d'utilisation de conditions
+      debug:
+        msg: "Cette tâche est exécutée uniquement si la condition est vraie"
+      when: ma_variable == "valeur"  # Condition pour exécuter la tâche
+
+    - name: Exemple d'utilisation d'une boucle
+      debug:
+        msg: "Ceci est la valeur de l'élément : {{ item }}"
+      loop:
+        - "élément 1"
+        - "élément 2"
+        - "élément 3"
+
+    - name: Utilisation d'un rôle Ansible
+      include_role:
+        name: mon_role  # Nom du rôle à inclure
+```
+
+
+
+### Explication des sections du Playbook :
+
+1.  **Mise à jour des paquets** :
+    
+    -   `apt` : Utilisation du module apt pour gérer les paquets.
+    -   `update_cache: yes` : Mettre à jour le cache des paquets.
+    -   `upgrade: yes` : Mettre à jour tous les paquets.
+2.  **Installation des paquets essentiels** :
+    
+    -   Utilisation d'une boucle pour installer plusieurs paquets (`htop`, `nano`).
+3.  **Vérification de l'installation d'Apache** :
+    
+    -   `stat` : Utilisation du module stat pour vérifier l'existence du binaire Apache.
+    -   `register` : Enregistrer le résultat de la vérification dans une variable.
+4.  **Installation d'Apache si nécessaire** :
+    
+    -   Condition `when` pour installer Apache seulement s'il n'est pas déjà présent.
+5.  **Utilisation de variables et conditions** :
+    
+    -   `vars` : Déclaration des variables utilisées dans le Playbook.
+    -   `debug` : Affichage des messages de débogage.
+    -   Conditions `when` pour exécuter des tâches spécifiques.
+6.  **Utilisation de boucles** :
+    
+    -   `loop` : Utilisation d'une boucle pour parcourir une liste d'éléments.
+7.  **Inclusion d'un rôle Ansible** :
+    
+    -   `include_role` : Inclusion d'un rôle Ansible pour organiser les tâches complexes.
+
+Ce Playbook montre comment structurer les tâches courantes avec Ansible, utiliser des variables, des conditions, des boucles et inclure des rôles pour une gestion modulaire des configurations.
