@@ -92,6 +92,7 @@ Le playbook Ansible update.yml met à jour les systèmes d'exploitation Debian e
       debug:
         var: discord_response_failure
 
+```
 
 
 
