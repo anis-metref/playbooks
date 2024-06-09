@@ -1,6 +1,6 @@
 ### Mise à jour du système Debian en utilisant Ansible :
 
-Pour tester vos Playbooks Ansible, vous pouvez utiliser différentes commandes et options pour valider, déboguer et exécuter des tâches spécifiques. Voici quelques commandes et options couramment utilisées :
+Pour tester les Playbooks Ansible, vous pouvez utiliser différentes commandes et options pour valider, déboguer et exécuter des tâches spécifiques. Voici quelques commandes et options couramment utilisées :
 
 1.  **Vérification des faits sur les machines cibles** :
     -   Utilisez la commande `ansible` avec l'option `-m setup` pour collecter des faits sur les machines cibles. Par exemple :
