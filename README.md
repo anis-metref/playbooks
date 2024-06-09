@@ -35,17 +35,6 @@ ansible-playbook playbook.yml --tags "update,configuration"
 
 ```
 
--   **Débogage avec le module debug** :
-    -   Utilisez le module `debug` dans vos Playbooks pour afficher des informations utiles lors de l'exécution. Par exemple :
-        
-        yaml
-        
-
-```yaml
-- name: Afficher des informations de débogage
-  debug:
-    msg: "Ceci est un message de débogage"
-```
 
 
 -   **Vérification des changements avec le mode --check** :
