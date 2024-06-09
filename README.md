@@ -31,7 +31,7 @@ ansible all -m ping -v
         
 
 ```cpp
-ansible-playbook playbook.yml --tags "update,configuration"
+ansible-playbook update.yml --tags "update,configuration"
 
 ```
 
