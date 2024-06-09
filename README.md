@@ -63,6 +63,37 @@ Ces commandes et options vous permettront de tester, déboguer et exécuter vos 
 
 Le playbook Ansible update.yml met à jour les systèmes d'exploitation Debian et envoie une notification à Discord en cas de succès ou d'échec de la mise à jour :
 
+```yaml
+- name: Mise à jour des systèmes d'exploitation Debian et notification à Discord
+  hosts: all
+  become: true
+  tasks:
+    - name: Mise à jour des paquets Debian
+      apt:
+        upgrade: yes
+        update_cache: yes
+      register: apt_update_result
+    - name: Envoyer une notification à Discord en cas de succès de la mise à jour
+      when: apt_update_result.changed
+      when: apt_update_result.failed
+      uri:
+        url: "https://discord.com/api/webhooks/,,,,n"  # Remplacez WEBHOOK_ID et TOKEN par les valeurs de votre webhook Discord
+        method: POST
+        body_format: json
+        headers:
+          Content-Type: "application/json"
+        body:
+          content: "Échec lors de la mise à jour des paquets Debian sur {{ ansible_hostname }}"
+      register: discord_response_failure
+    - name: Afficher la réponse du serveur Discord en cas de succès
+      debug:
+        var: discord_response_success
+    - name: Afficher la réponse du serveur Discord en cas d'échec
+      debug:
+        var: discord_response_failure
+
+
+
 
 Ce Playbook Ansible effectue les actions suivantes :
 
